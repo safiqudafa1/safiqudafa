@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Safiqudafa - Personal Portfolio</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Poppins & Montserrat -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Custom Tailwind Theme Extension -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        darkbg: '#0a0a0c',
+                        darkcard: '#121218',
+                        brandRed: '#e63946',
+                        brandRedDark: '#9e1b24',
+                        gold: '#dfa649',
+                        goldLight: '#f4c468',
+                    },
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif'],
+                        heading: ['Montserrat', 'sans-serif'],
+                    },
+                    boxShadow: {
+                        'glow-red': '0 0 25px -5px rgba(230, 57, 70, 0.4)',
+                        'glow-gold': '0 0 25px -5px rgba(223, 166, 73, 0.4)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom Smooth Scroll & Selection Styling */
+        ::selection {
+            background-color: #e63946;
+            color: #ffffff;
+        }
+
+        /* Glassmorphism Classes */
+        .glass-card {
+            background: rgba(18, 18, 24, 0.75);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        
+        .glass-card:hover {
+            border-color: rgba(223, 166, 73, 0.3);
+        }
+
+        /* Text Gradients */
+        .text-gradient-red-gold {
+            background: linear-gradient(135deg, #f4c468 0%, #e63946 50%, #ff6b6b 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .text-gradient-gold {
+            background: linear-gradient(135deg, #fff3d1 0%, #dfa649 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Background Animated Glow Effects */
+        .glow-bg-red {
+            position: absolute;
+            width: 350px;
+            height: 350px;
+            background: radial-gradient(circle, rgba(230,57,70,0.18) 0%, rgba(0,0,0,0) 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .glow-bg-gold {
+            position: absolute;
+            width: 350px;
+            height: 350px;
+            background: radial-gradient(circle, rgba(223,166,73,0.15) 0%, rgba(0,0,0,0) 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body class="bg-darkbg text-gray-200 font-sans antialiased overflow-x-hidden selection:bg-brandRed selection:text-white">
+
+    <!-- Header / Navbar -->
+    <nav class="fixed top-0 left-0 right-0 z-50 glass-card bg-opacity-80 transition-all duration-300 border-b border-white/10" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Logo -->
+                <div class="flex-shrink-0 flex items-center space-x-2">
+                    <div class="w-10 h-10 rounded-lg bg-gradient-to-tr from-brandRed to-gold flex items-center justify-center font-heading font-extrabold text-white text-xl shadow-glow-red">
+                        S
+                    </div>
+                    <span class="font-heading text-xl font-bold tracking-wider text-white">SAFIQU<span class="text-gold">DAFA</span></span>
+                </div>
+
+                <!-- Desktop Navigation Links -->
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8 text-sm font-medium">
+                        <a href="#home" class="text-white hover:text-gold transition-colors duration-200">Beranda</a>
+                        <a href="#about" class="text-gray-300 hover:text-gold transition-colors duration-200">Tentang Saya</a>
+                        <a href="#skills" class="text-gray-300 hover:text-gold transition-colors duration-200">Keterampilan</a>
+                        <a href="#gallery" class="text-gray-300 hover:text-gold transition-colors duration-200">Galeri</a>
+                        <a href="#hobby" class="text-gray-300 hover:text-gold transition-colors duration-200">Hobi</a>
+                        <a href="#contact" class="px-5 py-2.5 rounded-full bg-gradient-to-r from-brandRed to-brandRedDark text-white font-semibold hover:shadow-glow-red transition-all duration-300 border border-red-500/30">Kontak Saya</a>
+                    </div>
+                </div>
+
+                <!-- Mobile menu button -->
+                <div class="md:hidden">
+                    <button id="mobile-menu-btn" type="button" class="text-gray-300 hover:text-white focus:outline-none p-2 rounded-md" aria-label="Toggle Menu">
+                        <i class="fa-solid fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu dropdown -->
+        <div class="md:hidden hidden bg-darkcard/95 border-b border-white/10 transition-all" id="mobile-menu">
+            <div class="px-4 pt-2 pb-6 space-y-3 font-medium">
+                <a href="#home" class="mobile-link block px-3 py-2 rounded-md text-base text-white hover:bg-white/5 hover:text-gold">Beranda</a>
+                <a href="#about" class="mobile-link block px-3 py-2 rounded-md text-base text-gray-300 hover:bg-white/5 hover:text-gold">Tentang Saya</a>
+                <a href="#skills" class="mobile-link block px-3 py-2 rounded-md text-base text-gray-300 hover:bg-white/5 hover:text-gold">Keterampilan</a>
+                <a href="#gallery" class="mobile-link block px-3 py-2 rounded-md text-base text-gray-300 hover:bg-white/5 hover:text-gold">Galeri Skill</a>
+                <a href="#hobby" class="mobile-link block px-3 py-2 rounded-md text-base text-gray-300 hover:bg-white/5 hover:text-gold">Hobi Touring</a>
+                <a href="#contact" class="mobile-link block text-center px-4 py-2.5 rounded-full bg-gradient-to-r from-brandRed to-brandRedDark text-white font-semibold shadow-glow-red">Kontak Saya</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative pt-32 pb-20 md:pt-44 md:pb-32 overflow-hidden flex items-center min-h-screen">
+        <!-- Background Orbs -->
+        <div class="glow-bg-red top-10 -left-20"></div>
+        <div class="glow-bg-gold bottom-10 right-0"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                
+                <!-- Left Text Content -->
+                <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+                    <div class="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full glass-card border border-gold/30 text-gold text-xs sm:text-sm font-semibold tracking-wide">
+                        <span class="w-2 h-2 rounded-full bg-brandRed animate-ping"></span>
+                        <span>Teknisi CCTV & Creative Media Editor</span>
+                    </div>
+                    
+                    <h1 class="text-4xl sm:text-6xl font-heading font-extrabold text-white tracking-tight leading-tight">
+                        Halo, Saya <br class="hidden sm:inline" />
+                        <span class="text-gradient-red-gold">SAFIQUDAFA</span>
+                    </h1>
+
+                    <p class="text-gray-400 text-base sm:text-lg max-w-2xl mx-auto lg:mx-0 leading-relaxed">
+                        Spesialis dalam <strong class="text-white">Instalasi & Konfigurasi Sistem CCTV Security</strong> serta profesional dalam <strong class="text-white">Penyuntingan Video & Desain Foto Digital</strong>. Siap memberikan solusi teknis terbaik dan karya visual berkualitas tinggi.
+                    </p>
+
+                    <!-- Contact & CTA Buttons -->
+                    <div class="flex flex-wrap justify-center lg:justify-start gap-4 pt-4">
+                        <a href="https://wa.me/6285792124938?text=Halo%20Safiqudafa,%20saya%20tertarik%20dengan%20jasa/layanan%20Anda." target="_blank" class="px-7 py-3.5 rounded-full bg-gradient-to-r from-brandRed via-red-600 to-brandRedDark text-white font-semibold flex items-center gap-2 hover:shadow-glow-red hover:scale-105 transition-all duration-300 border border-red-400/40">
+                            <i class="fa-brands fa-whatsapp text-xl"></i>
+                            <span>Hubungi WhatsApp</span>
+                        </a>
+                        <a href="#gallery" class="px-7 py-3.5 rounded-full glass-card text-white font-semibold hover:border-gold hover:text-gold flex items-center gap-2 hover:scale-105 transition-all duration-300">
+                            <i class="fa-solid fa-photo-film"></i>
+                            <span>Lihat Portofolio</span>
+                        </a>
+                    </div>
+
+                    <!-- Quick Details Badge Strip -->
+                    <div class="pt-8 grid grid-cols-2 sm:grid-cols-3 gap-4 text-left max-w-lg mx-auto lg:mx-0 border-t border-white/10">
+                        <div>
+                            <span class="block text-xs text-gray-500 uppercase tracking-wider">Lokasi</span>
+                            <span class="text-sm font-medium text-gray-200">Blitar, Jawa Timur</span>
+                        </div>
+                        <div>
+                            <span class="block text-xs text-gray-500 uppercase tracking-wider">Keahlian Utama</span>
+                            <span class="text-sm font-medium text-gold">CCTV & Video Edit</span>
+                        </div>
+                        <div class="col-span-2 sm:col-span-1">
+                            <span class="block text-xs text-gray-500 uppercase tracking-wider">Status</span>
+                            <span class="text-sm font-medium text-emerald-400 flex items-center gap-1.5">
+                                <span class="w-2 h-2 rounded-full bg-emerald-500"></span> Siap Proyek
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Visual Element / Avatar Placeholder -->
+                <div class="lg:col-span-5 flex justify-center">
+                    <div class="relative w-64 h-64 sm:w-80 sm:h-80 lg:w-96 lg:h-96">
+                        <!-- Decorative Frame Elements -->
+                        <div class="absolute inset-0 rounded-3xl bg-gradient-to-tr from-brandRed to-gold opacity-20 blur-xl animate-pulse"></div>
+                        <div class="absolute -inset-1 rounded-3xl bg-gradient-to-r from-brandRed via-gold to-brandRed opacity-75 blur-sm"></div>
+                        
+                        <!-- Main Card Avatar Frame -->
+                        <div class="relative w-full h-full rounded-3xl bg-darkcard p-4 border border-white/10 flex flex-col items-center justify-center text-center overflow-hidden">
+                            <!-- Background Subtle Pattern -->
+                            <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#dfa649_1px,transparent_1px)] [background-size:16px_16px]"></div>
+
+                            <div class="w-32 h-32 sm:w-40 sm:h-40 rounded-full bg-gradient-to-b from-gray-800 to-darkbg border-2 border-gold/40 flex items-center justify-center text-5xl sm:text-6xl text-gold shadow-glow-gold mb-4 relative z-10">
+                                <i class="fa-solid fa-user-shield"></i>
+                            </div>
+
+                            <h3 class="font-heading font-bold text-xl text-white relative z-10">SAFIQUDAFA</h3>
+                            <p class="text-xs text-gray-400 mt-1 relative z-10">CCTV Technician & Multimedia Editor</p>
+                            
+                            <div class="mt-4 flex gap-3 relative z-10">
+                                <span class="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs text-gold"><i class="fa-solid fa-video mr-1"></i> CCTV</span>
+                                <span class="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs text-brandRed"><i class="fa-solid fa-film mr-1"></i> Editor</span>
+                                <span class="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs text-white"><i class="fa-solid fa-motorcycle mr-1"></i> Rider</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- About Me Section -->
+    <section id="about" class="py-20 relative bg-darkcard/40 border-y border-white/5">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-xs font-semibold uppercase tracking-widest text-gold mb-2"><i class="fa-solid fa-user text-brandRed mr-2"></i>Tentang Saya</h2>
+                <p class="text-3xl sm:text-4xl font-heading font-bold text-white">Profil & Latar Belakang</p>
+                <div class="w-20 h-1 bg-gradient-to-r from-brandRed to-gold mx-auto mt-4 rounded-full"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
+                <!-- Bio Card -->
+                <div class="glass-card rounded-2xl p-8 flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-2xl font-heading font-bold text-white mb-4 flex items-center gap-3">
+                            <span class="text-brandRed"><i class="fa-solid fa-id-card"></i></span>
+                            Siapa Saya?
+                        </h3>
+                        <p class="text-gray-300 leading-relaxed mb-6">
+                            Saya adalah seorang profesional yang berdomisili di Blitar, Jawa Timur, dengan dedikasi tinggi pada bidang keamanan digital dan produksi media visual. Memiliki keahlian teknis dalam merancang, memasang, serta merawat instalasi CCTV untuk keperluan rumah pribadi maupun bisnis.
+                        </p>
+                        <p class="text-gray-300 leading-relaxed">
+                            Di samping itu, saya aktif mengeksplorasi kreativitas melalui editing foto dan video dengan gaya modern yang estetis. Di waktu senggang, hobi <strong class="text-gold">Touring</strong> memberikan saya inspirasi baru dan ketelitian yang diterapkan dalam setiap pekerjaan.
+                        </p>
+                    </div>
+
+                    <div class="mt-8 pt-6 border-t border-white/10 flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-xl bg-gold/10 border border-gold/30 flex items-center justify-center text-gold text-xl">
+                            <i class="fa-solid fa-compass"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-white font-semibold text-sm">Prinsip Kerja</h4>
+                            <p class="text-xs text-gray-400">Presisi Teknis, Ketepatan Waktu & Kualitas Visual Terbaik</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Info Detail Card -->
+                <div class="glass-card rounded-2xl p-8 flex flex-col justify-between">
+                    <h3 class="text-2xl font-heading font-bold text-white mb-6 flex items-center gap-3">
+                        <span class="text-gold"><i class="fa-solid fa-circle-info"></i></span>
+                        Informasi Lengkap
+                    </h3>
+
+                    <div class="space-y-5">
+                        <!-- Info Item -->
+                        <div class="flex items-start gap-4 p-3.5 rounded-xl bg-white/5 border border-white/5 hover:border-gold/30 transition-all">
+                            <div class="w-10 h-10 rounded-lg bg-brandRed/20 border border-brandRed/40 flex items-center justify-center text-brandRed flex-shrink-0">
+                                <i class="fa-solid fa-user"></i>
+                            </div>
+                            <div>
+                                <span class="text-xs text-gray-400 block">Nama Lengkap</span>
+                                <span class="text-white font-semibold">Safiqudafa</span>
+                            </div>
+                        </div>
+
+                        <!-- Info Item -->
+                        <div class="flex items-start gap-4 p-3.5 rounded-xl bg-white/5 border border-white/5 hover:border-gold/30 transition-all">
+                            <div class="w-10 h-10 rounded-lg bg-gold/20 border border-gold/40 flex items-center justify-center text-gold flex-shrink-0">
+                                <i class="fa-solid fa-envelope"></i>
+                            </div>
+                            <div class="overflow-hidden">
+                                <span class="text-xs text-gray-400 block">Email Resmi</span>
+                                <a href="mailto:safiqusaputra0@gmail.com" class="text-white font-semibold hover:text-gold transition-colors block truncate">safiqusaputra0@gmail.com</a>
+                            </div>
+                        </div>
+
+                        <!-- Info Item -->
+                        <div class="flex items-start gap-4 p-3.5 rounded-xl bg-white/5 border border-white/5 hover:border-gold/30 transition-all">
+                            <div class="w-10 h-10 rounded-lg bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center text-emerald-400 flex-shrink-0">
+                                <i class="fa-solid fa-phone"></i>
+                            </div>
+                            <div>
+                                <span class="text-xs text-gray-400 block">Nomor Telepon / WA</span>
+                                <a href="https://wa.me/6285792124938" target="_blank" class="text-white font-semibold hover:text-emerald-400 transition-colors">085792124938</a>
+                            </div>
+                        </div>
+
+                        <!-- Info Item -->
+                        <div class="flex items-start gap-4 p-3.5 rounded-xl bg-white/5 border border-white/5 hover:border-gold/30 transition-all">
+                            <div class="w-10 h-10 rounded-lg bg-blue-500/20 border border-blue-500/40 flex items-center justify-center text-blue-400 flex-shrink-0">
+                                <i class="fa-solid fa-location-dot"></i>
+                            </div>
+                            <div>
+                                <span class="text-xs text-gray-400 block">Alamat Rumah</span>
+                                <span class="text-white font-semibold text-sm leading-snug block">Perumahan Puri Teratai Blok F5, Kendalrejo, Kec. Talun, Kab. Blitar, Jawa Timur</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-20 relative">
+        <div class="glow-bg-red top-1/3 -right-20"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-xs font-semibold uppercase tracking-widest text-gold mb-2"><i class="fa-solid fa-screwdriver-wrench text-brandRed mr-2"></i>Keahlian Utama</h2>
+                <p class="text-3xl sm:text-4xl font-heading font-bold text-white">Keterampilan Profesional</p>
+                <div class="w-20 h-1 bg-gradient-to-r from-brandRed to-gold mx-auto mt-4 rounded-full"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                
+                <!-- Skill 1: CCTV Installation -->
+                <div class="glass-card rounded-2xl p-8 hover:shadow-glow-red transition-all duration-300 relative overflow-hidden group">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-brandRed/10 rounded-bl-full pointer-events-none group-hover:scale-110 transition-transform"></div>
+                    
+                    <div class="w-16 h-16 rounded-2xl bg-gradient-to-tr from-brandRed to-red-600 flex items-center justify-center text-white text-3xl shadow-lg mb-6">
+                        <i class="fa-solid fa-video"></i>
+                    </div>
+
+                    <h3 class="text-2xl font-heading font-bold text-white mb-3">Instalasi & Security CCTV</h3>
+                    <p class="text-gray-300 text-sm leading-relaxed mb-6">
+                        Layanan pemasangan sistem pengawasan CCTV terpadu. Meliputi penentuan titik strategis kamera, manajemen kabel rapi, konfigurasi DVR/NVR, serta pengaturan akses pemantauan jarak jauh via *Smartphone* (Online Monitoring).
+                    </p>
+
+                    <!-- Skill Highlights -->
+                    <div class="space-y-3 mb-6">
+                        <div>
+                            <div class="flex justify-between text-xs font-semibold mb-1">
+                                <span class="text-gray-300">Pemasangan Kamera IP & Analog</span>
+                                <span class="text-gold">95%</span>
+                            </div>
+                            <div class="w-full h-2 rounded-full bg-white/10 overflow-hidden">
+                                <div class="h-full bg-gradient-to-r from-brandRed to-gold rounded-full" style="width: 95%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-xs font-semibold mb-1">
+                                <span class="text-gray-300">Setting DVR/NVR & Remote Phone Access</span>
+                                <span class="text-gold">90%</span>
+                            </div>
+                            <div class="w-full h-2 rounded-full bg-white/10 overflow-hidden">
+                                <div class="h-full bg-gradient-to-r from-brandRed to-gold rounded-full" style="width: 90%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-xs font-semibold mb-1">
+                                <span class="text-gray-300">Manajemen Kabel & Troubleshooting</span>
+                                <span class="text-gold">92%</span>
+                            </div>
+                            <div class="w-full h-2 rounded-full bg-white/10 overflow-hidden">
+                                <div class="h-full bg-gradient-to-r from-brandRed to-gold rounded-full" style="width: 92%"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tags -->
+                    <div class="flex flex-wrap gap-2 pt-2 border-t border-white/10">
+                        <span class="text-xs px-3 py-1 rounded-md bg-white/5 text-gray-300 border border-white/10">Hikvision / Dahua</span>
+                        <span class="text-xs px-3 py-1 rounded-md bg-white/5 text-gray-300 border border-white/10">IP Camera</span>
+                        <span class="text-xs px-3 py-1 rounded-md bg-white/5 text-gray-300 border border-white/10">Networking</span>
+                        <span class="text-xs px-3 py-1 rounded-md bg-white/5 text-gray-300 border border-white/10">DVR Setup</span>
+                    </div>
+                </div>
+
+                <!-- Skill 2: Edit Video & Foto -->
+                <div class="glass-card rounded-2xl p-8 hover:shadow-glow-gold transition-all duration-300 relative overflow-hidden group">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-gold/10 rounded-bl-full pointer-events-none group-hover:scale-110 transition-transform"></div>
+
+                    <div class="w-16 h-16 rounded-2xl bg-gradient-to-tr from-gold to-goldLight flex items-center justify-center text-darkbg text-3xl shadow-lg mb-6">
+                        <i class="fa-solid fa-wand-magic-sparkles"></i>
+                    </div>
+
+                    <h3 class="text-2xl font-heading font-bold text-white mb-3">Edit Video & Foto Digital</h3>
+                    <p class="text-gray-300 text-sm leading-relaxed mb-6">
+                        Penyuntingan konten media kreatif untuk berbagai kebutuhan sosial media, branding, promosi, hingga dokumentasi acara. Berfokus pada pemotongan presisi, *color grading*, transisi halus, serta retouching foto yang memikat.
+                    </p>
+
+                    <!-- Skill Highlights -->
+                    <div class="space-y-3 mb-6">
+                        <div>
+                            <div class="flex justify-between text-xs font-semibold mb-1">
+                                <span class="text-gray-300">Video Editing (Reels, TikTok, Cinematic)</span>
+                                <span class="text-gold">90%</span>
+                            </div>
+                            <div class="w-full h-2 rounded-full bg-white/10 overflow-hidden">
+                                <div class="h-full bg-gradient-to-r from-gold to-brandRed rounded-full" style="width: 90%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-xs font-semibold mb-1">
+                                <span class="text-gray-300">Photo Retouching & Color Grading</span>
+                                <span class="text-gold">88%</span>
+                            </div>
+                            <div class="w-full h-2 rounded-full bg-white/10 overflow-hidden">
+                                <div class="h-full bg-gradient-to-r from-gold to-brandRed rounded-full" style="width: 88%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-xs font-semibold mb-1">
+                                <span class="text-gray-300">Audio Sync & Graphic Effects</span>
+                                <span class="text-gold">85%</span>
+                            </div>
+                            <div class="w-full h-2 rounded-full bg-white/10 overflow-hidden">
+                                <div class="h-full bg-gradient-to-r from-gold to-brandRed rounded-full" style="width: 85%"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tags -->
+                    <div class="flex flex-wrap gap-2 pt-2 border-t border-white/10">
+                        <span class="text-xs px-3 py-1 rounded-md bg-white/5 text-gray-300 border border-white/10">CapCut Pro / Premiere</span>
+                        <span class="text-xs px-3 py-1 rounded-md bg-white/5 text-gray-300 border border-white/10">Lightroom / Photoshop</span>
+                        <span class="text-xs px-3 py-1 rounded-md bg-white/5 text-gray-300 border border-white/10">Cinematic Style</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Skill Section -->
+    <section id="gallery" class="py-20 relative bg-darkcard/30 border-t border-white/5">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <h2 class="text-xs font-semibold uppercase tracking-widest text-gold mb-2"><i class="fa-solid fa-images text-brandRed mr-2"></i>Portofolio Karya</h2>
+                <p class="text-3xl sm:text-4xl font-heading font-bold text-white">Galeri Skill & Hasil Kerja</p>
+                <div class="w-20 h-1 bg-gradient-to-r from-brandRed to-gold mx-auto mt-4 rounded-full"></div>
+            </div>
+
+            <!-- Filter Buttons -->
+            <div class="flex justify-center gap-3 mb-10 flex-wrap">
+                <button onclick="filterGallery('all')" class="filter-btn active px-6 py-2 rounded-full border border-gold bg-gold text-darkbg font-semibold text-sm transition-all duration-300">Semua Proyek</button>
+                <button onclick="filterGallery('cctv')" class="filter-btn px-6 py-2 rounded-full border border-white/10 bg-white/5 text-gray-300 hover:border-brandRed hover:text-white font-semibold text-sm transition-all duration-300">Instalasi CCTV</button>
+                <button onclick="filterGallery('edit')" class="filter-btn px-6 py-2 rounded-full border border-white/10 bg-white/5 text-gray-300 hover:border-gold hover:text-white font-semibold text-sm transition-all duration-300">Edit Video & Foto</button>
+            </div>
+
+            <!-- Gallery Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" id="gallery-grid">
+                
+                <!-- Item 1: CCTV -->
+                <div class="gallery-item cctv group glass-card rounded-2xl overflow-hidden cursor-pointer transition-all duration-300 hover:-translate-y-2" onclick="openModal('Pemasangan CCTV Outdoor & Manajemen Cable', 'CCTV', 'https://images.unsplash.com/photo-1557597774-9d273605dfa9?auto=format&fit=crop&w=800&q=80')">
+                    <div class="relative h-56 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1557597774-9d273605dfa9?auto=format&fit=crop&w=800&q=80" alt="Instalasi CCTV Outdoor" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" onerror="this.src='https://placehold.co/800x600/121218/dfa649?text=CCTV+Installation'">
+                        <div class="absolute inset-0 bg-gradient-to-t from-darkbg via-transparent to-transparent opacity-80"></div>
+                        <span class="absolute top-4 left-4 text-xs font-bold px-3 py-1 rounded-full bg-brandRed text-white">CCTV</span>
+                    </div>
+                    <div class="p-5">
+                        <h4 class="text-lg font-heading font-bold text-white group-hover:text-gold transition-colors">Pemasangan Kamera CCTV Outdoor</h4>
+                        <p class="text-xs text-gray-400 mt-2">Instalasi sistem pengawasan luar ruangan dengan proteksi kabel tahan cuaca.</p>
+                    </div>
+                </div>
+
+                <!-- Item 2: CCTV Monitoring -->
+                <div class="gallery-item cctv group glass-card rounded-2xl overflow-hidden cursor-pointer transition-all duration-300 hover:-translate-y-2" onclick="openModal('Konfigurasi DVR & Remote Smartphone Access', 'CCTV', 'https://images.unsplash.com/photo-1541888946425-d0fbb186a5b3?auto=format&fit=crop&w=800&q=80')">
+                    <div class="relative h-56 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1541888946425-d0fbb186a5b3?auto=format&fit=crop&w=800&q=80" alt="DVR Setup" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" onerror="this.src='https://placehold.co/800x600/121218/dfa649?text=DVR+Setting'">
+                        <div class="absolute inset-0 bg-gradient-to-t from-darkbg via-transparent to-transparent opacity-80"></div>
+                        <span class="absolute top-4 left-4 text-xs font-bold px-3 py-1 rounded-full bg-brandRed text-white">CCTV</span>
+                    </div>
+                    <div class="p-5">
+                        <h4 class="text-lg font-heading font-bold text-white group-hover:text-gold transition-colors">Setup DVR & Remote Live View</h4>
+                        <p class="text-xs text-gray-400 mt-2">Integrasi sistem CCTV ke perangkat HP Android/iOS untuk akses real-time kapan saja.</p>
+                    </div>
+                </div>
+
+                <!-- Item 3: Video Edit -->
+                <div class="gallery-item edit group glass-card rounded-2xl overflow-hidden cursor-pointer transition-all duration-300 hover:-translate-y-2" onclick="openModal('Cinematic Video Editing & Color Grading', 'Edit Media', 'https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?auto=format&fit=crop&w=800&q=80')">
+                    <div class="relative h-56 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?auto=format&fit=crop&w=800&q=80" alt="Video Editing Timeline" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" onerror="this.src='https://placehold.co/800x600/121218/dfa649?text=Video+Editing'">
+                        <div class="absolute inset-0 bg-gradient-to-t from-darkbg via-transparent to-transparent opacity-80"></div>
+                        <span class="absolute top-4 left-4 text-xs font-bold px-3 py-1 rounded-full bg-gold text-darkbg">Edit Video</span>
+                    </div>
+                    <div class="p-5">
+                        <h4 class="text-lg font-heading font-bold text-white group-hover:text-gold transition-colors">Cinematic Editing & Color Grading</h4>
+                        <p class="text-xs text-gray-400 mt-2">Penyuntingan video pendek bertema cinematic dengan ritme transisi yang presisi.</p>
+                    </div>
+                </div>
+
+                <!-- Item 4: Photo Edit -->
+                <div class="gallery-item edit group glass-card rounded-2xl overflow-hidden cursor-pointer transition-all duration-300 hover:-translate-y-2" onclick="openModal('Photo Retouching & Tone Adjustment', 'Edit Media', 'https://images.unsplash.com/photo-1542744094-3a31b272c490?auto=format&fit=crop&w=800&q=80')">
+                    <div class="relative h-56 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1542744094-3a31b272c490?auto=format&fit=crop&w=800&q=80" alt="Photo Editing" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" onerror="this.src='https://placehold.co/800x600/121218/dfa649?text=Photo+Editing'">
+                        <div class="absolute inset-0 bg-gradient-to-t from-darkbg via-transparent to-transparent opacity-80"></div>
+                        <span class="absolute top-4 left-4 text-xs font-bold px-3 py-1 rounded-full bg-gold text-darkbg">Edit Foto</span>
+                    </div>
+                    <div class="p-5">
+                        <h4 class="text-lg font-heading font-bold text-white group-hover:text-gold transition-colors">Retouching & Desain Digital</h4>
+                        <p class="text-xs text-gray-400 mt-2">Optimasi pencahayaan, koreksi warna, dan retouching detail pada foto produk/profil.</p>
+                    </div>
+                </div>
+
+                <!-- Item 5: CCTV Networking -->
+                <div class="gallery-item cctv group glass-card rounded-2xl overflow-hidden cursor-pointer transition-all duration-300 hover:-translate-y-2" onclick="openModal('Instalasi IP Camera & Switch Hub Network', 'CCTV', 'https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&w=800&q=80')">
+                    <div class="relative h-56 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&w=800&q=80" alt="Network Cable CCTV" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" onerror="this.src='https://placehold.co/800x600/121218/dfa649?text=CCTV+Network'">
+                        <div class="absolute inset-0 bg-gradient-to-t from-darkbg via-transparent to-transparent opacity-80"></div>
+                        <span class="absolute top-4 left-4 text-xs font-bold px-3 py-1 rounded-full bg-brandRed text-white">CCTV</span>
+                    </div>
+                    <div class="p-5">
+                        <h4 class="text-lg font-heading font-bold text-white group-hover:text-gold transition-colors">Jaringan IP Cam & Cable Management</h4>
+                        <p class="text-xs text-gray-400 mt-2">Penataan kabel LAN RJ45 dan switch hub POE untuk kestabilan koneksi kamera IP.</p>
+                    </div>
+                </div>
+
+                <!-- Item 6: Content Creation -->
+                <div class="gallery-item edit group glass-card rounded-2xl overflow-hidden cursor-pointer transition-all duration-300 hover:-translate-y-2" onclick="openModal('Pembuatan Konten Sosial Media & Reels', 'Edit Media', 'https://images.unsplash.com/photo-1611162617474-5b21e879e113?auto=format&fit=crop&w=800&q=80')">
+                    <div class="relative h-56 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1611162617474-5b21e879e113?auto=format&fit=crop&w=800&q=80" alt="Social Media Editing" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" onerror="this.src='https://placehold.co/800x600/121218/dfa649?text=Social+Media+Content'">
+                        <div class="absolute inset-0 bg-gradient-to-t from-darkbg via-transparent to-transparent opacity-80"></div>
+                        <span class="absolute top-4 left-4 text-xs font-bold px-3 py-1 rounded-full bg-gold text-darkbg">Edit Video</span>
+                    </div>
+                    <div class="p-5">
+                        <h4 class="text-lg font-heading font-bold text-white group-hover:text-gold transition-colors">Social Media Content Editing</h4>
+                        <p class="text-xs text-gray-400 mt-2">Pengolahan video pendek format vertikal (Reels / TikTok) siap tayang.</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Hobby Section -->
+    <section id="hobby" class="py-20 relative overflow-hidden">
+        <div class="glow-bg-gold top-10 left-10"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="glass-card rounded-3xl p-8 sm:p-12 border border-gold/30 relative overflow-hidden">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                    
+                    <div class="lg:col-span-7 space-y-6">
+                        <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-gold/10 border border-gold/30 text-gold text-xs font-semibold">
+                            <i class="fa-solid fa-motorcycle"></i>
+                            <span>Passion & Lifestyle</span>
+                        </div>
+
+                        <h2 class="text-3xl sm:text-5xl font-heading font-extrabold text-white">
+                            Hobi: <span class="text-gradient-gold">TOURING</span>
+                        </h2>
+
+                        <p class="text-gray-300 text-base leading-relaxed">
+                            Bagi saya, <strong class="text-gold">Touring</strong> bukan sekadar perjalanan di atas roda dua, melainkan cara terbaik untuk melatih ketahanan fisik, fokus visual, dan kemampuan navigasi. Menjelajahi rupa-rupa lanskap Indonesia melatih dedikasi dan kesabaran—dua hal kunci yang selalu saya terapkan dalam setiap proyek teknis maupun karya kreatif.
+                        </p>
+
+                        <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 pt-4">
+                            <div class="p-4 rounded-xl bg-white/5 border border-white/5 text-center">
+                                <i class="fa-solid fa-route text-2xl text-brandRed mb-2 block"></i>
+                                <span class="text-xs text-gray-400 block">Eksplorasi</span>
+                                <span class="text-sm font-semibold text-white">Rute Antar Kota</span>
+                            </div>
+                            <div class="p-4 rounded-xl bg-white/5 border border-white/5 text-center">
+                                <i class="fa-solid fa-camera text-2xl text-gold mb-2 block"></i>
+                                <span class="text-xs text-gray-400 block">Dokumentasi</span>
+                                <span class="text-sm font-semibold text-white">Scenery & Vlog</span>
+                            </div>
+                            <div class="p-4 rounded-xl bg-white/5 border border-white/5 text-center col-span-2 sm:col-span-1">
+                                <i class="fa-solid fa-shield-halved text-2xl text-emerald-400 mb-2 block"></i>
+                                <span class="text-xs text-gray-400 block">Safety</span>
+                                <span class="text-sm font-semibold text-white">Riding First</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Hobby Image Showcase -->
+                    <div class="lg:col-span-5 flex justify-center">
+                        <div class="relative w-full max-w-md h-72 sm:h-80 rounded-2xl overflow-hidden border border-white/10 shadow-glow-gold group">
+                            <img src="https://images.unsplash.com/photo-1558981806-ec527fa84c39?auto=format&fit=crop&w=800&q=80" alt="Touring Motorcycle" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" onerror="this.src='https://placehold.co/800x600/121218/e63946?text=Touring+Rider'">
+                            <div class="absolute inset-0 bg-gradient-to-t from-darkbg via-transparent to-transparent"></div>
+                            <div class="absolute bottom-4 left-4 right-4 text-center">
+                                <span class="text-xs font-semibold text-gold tracking-widest uppercase">Explore Without Limits</span>
+                                <p class="text-sm font-heading font-bold text-white mt-0.5">Freedom on Two Wheels</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 relative bg-darkcard/50 border-t border-white/5">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-xs font-semibold uppercase tracking-widest text-gold mb-2"><i class="fa-solid fa-paper-plane text-brandRed mr-2"></i>Mari Berkomunikasi</h2>
+                <p class="text-3xl sm:text-4xl font-heading font-bold text-white">Hubungi Saya</p>
+                <div class="w-20 h-1 bg-gradient-to-r from-brandRed to-gold mx-auto mt-4 rounded-full"></div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+                
+                <!-- Left Details Cards -->
+                <div class="lg:col-span-5 space-y-4">
+                    <!-- WhatsApp Direct Card -->
+                    <a href="https://wa.me/6285792124938" target="_blank" class="glass-card p-6 rounded-2xl block hover:border-emerald-500/50 hover:shadow-glow-red transition-all group">
+                        <div class="flex items-center gap-4">
+                            <div class="w-14 h-14 rounded-2xl bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center text-emerald-400 text-2xl group-hover:scale-110 transition-transform">
+                                <i class="fa-brands fa-whatsapp"></i>
+                            </div>
+                            <div>
+                                <span class="text-xs text-gray-400 block font-medium uppercase">Kirim Pesan Langsung</span>
+                                <h4 class="text-lg font-bold text-white">WhatsApp Chat</h4>
+                                <p class="text-sm text-emerald-400 font-semibold mt-0.5">085792124938</p>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- Email Direct Card -->
+                    <a href="mailto:safiqusaputra0@gmail.com" class="glass-card p-6 rounded-2xl block hover:border-gold/50 hover:shadow-glow-gold transition-all group">
+                        <div class="flex items-center gap-4">
+                            <div class="w-14 h-14 rounded-2xl bg-gold/20 border border-gold/40 flex items-center justify-center text-gold text-2xl group-hover:scale-110 transition-transform">
+                                <i class="fa-solid fa-envelope"></i>
+                            </div>
+                            <div class="overflow-hidden">
+                                <span class="text-xs text-gray-400 block font-medium uppercase">Kirim Email Resmi</span>
+                                <h4 class="text-lg font-bold text-white">Email Contact</h4>
+                                <p class="text-sm text-gold font-semibold mt-0.5 truncate">safiqusaputra0@gmail.com</p>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- Address Detail Card -->
+                    <div class="glass-card p-6 rounded-2xl">
+                        <div class="flex items-start gap-4">
+                            <div class="w-14 h-14 rounded-2xl bg-brandRed/20 border border-brandRed/40 flex items-center justify-center text-brandRed text-2xl flex-shrink-0">
+                                <i class="fa-solid fa-map-location-dot"></i>
+                            </div>
+                            <div>
+                                <span class="text-xs text-gray-400 block font-medium uppercase">Alamat Domisili</span>
+                                <h4 class="text-lg font-bold text-white mb-1">Lokasi Saya</h4>
+                                <p class="text-xs text-gray-300 leading-relaxed">
+                                    Perumahan Puri Teratai Blok F5, Kendalrejo, Kec. Talun, Kab. Blitar, Jawa Timur
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Interactive Form -->
+                <div class="lg:col-span-7">
+                    <form id="contact-form" class="glass-card p-8 rounded-2xl space-y-6">
+                        <h3 class="text-xl font-heading font-bold text-white mb-2">Kirim Pesan Ke Safiqudafa</h3>
+                        
+                        <!-- Notification Alert Box -->
+                        <div id="form-alert" class="hidden p-4 rounded-xl text-sm font-medium"></div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-xs text-gray-400 uppercase font-semibold mb-2">Nama Anda</label>
+                                <input type="text" id="form-name" required placeholder="Masukkan nama anda" class="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:border-gold transition-colors">
+                            </div>
+                            <div>
+                                <label class="block text-xs text-gray-400 uppercase font-semibold mb-2">Layanan yang Dibutuhkan</label>
+                                <select id="form-service" class="w-full px-4 py-3 rounded-xl bg-darkcard border border-white/10 text-white focus:outline-none focus:border-gold transition-colors">
+                                    <option value="Instalasi CCTV">Instalasi / Setting CCTV</option>
+                                    <option value="Edit Video">Edit Video</option>
+                                    <option value="Edit Foto">Edit Foto / Retouch</option>
+                                    <option value="Lainnya">Diskusi Lainnya</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs text-gray-400 uppercase font-semibold mb-2">Isi Pesan</label>
+                            <textarea id="form-message" rows="4" required placeholder="Tuliskan detail kebutuhan atau pertanyaan anda di sini..." class="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:border-gold transition-colors"></textarea>
+                        </div>
+
+                        <button type="submit" class="w-full py-4 rounded-xl bg-gradient-to-r from-brandRed via-red-600 to-gold text-white font-bold tracking-wide hover:shadow-glow-red hover:scale-[1.01] transition-all duration-300 flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-paper-plane"></i>
+                            <span>Kirim via WhatsApp</span>
+                        </button>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-darkbg border-t border-white/10 py-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+                
+                <div class="flex items-center space-x-3">
+                    <div class="w-8 h-8 rounded-lg bg-gradient-to-tr from-brandRed to-gold flex items-center justify-center font-heading font-extrabold text-white text-sm">
+                        S
+                    </div>
+                    <span class="font-heading text-lg font-bold text-white tracking-wider">SAFIQUDAFA</span>
+                </div>
+
+                <p class="text-xs text-gray-500 text-center">
+                    &copy; <span id="year"></span> Safiqudafa. All Rights Reserved. Designed for GitHub Pages.
+                </p>
+
+                <div class="flex space-x-4">
+                    <a href="https://wa.me/6285792124938" target="_blank" class="w-9 h-9 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 hover:text-emerald-400 hover:border-emerald-400 transition-all">
+                        <i class="fa-brands fa-whatsapp"></i>
+                    </a>
+                    <a href="mailto:safiqusaputra0@gmail.com" class="w-9 h-9 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 hover:text-gold hover:border-gold transition-all">
+                        <i class="fa-solid fa-envelope"></i>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modal Lightbox Preview -->
+    <div id="image-modal" class="fixed inset-0 z-50 hidden bg-black/90 backdrop-blur-md flex items-center justify-center p-4">
+        <div class="relative max-w-4xl w-full glass-card rounded-2xl overflow-hidden border border-white/20">
+            <button onclick="closeModal()" class="absolute top-4 right-4 z-10 w-10 h-10 rounded-full bg-black/60 text-white hover:text-gold flex items-center justify-center transition-colors">
+                <i class="fa-solid fa-xmark text-xl"></i>
+            </button>
+            
+            <div class="max-h-[70vh] overflow-hidden bg-black flex items-center justify-center">
+                <img id="modal-img" src="" alt="Preview" class="max-h-[70vh] w-auto object-contain">
+            </div>
+            
+            <div class="p-6">
+                <span id="modal-tag" class="text-xs font-bold px-3 py-1 rounded-full bg-brandRed text-white"></span>
+                <h3 id="modal-title" class="text-xl font-heading font-bold text-white mt-2"></h3>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript Logic -->
+    <script>
+        // Set dynamic copyright year
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // Mobile Menu Toggle
+        const mobileBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu on link click
+        document.querySelectorAll('.mobile-link').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // Gallery Filtering Function
+        function filterGallery(category) {
+            const items = document.querySelectorAll('.gallery-item');
+            const buttons = document.querySelectorAll('.filter-btn');
+
+            // Style buttons
+            buttons.forEach(btn => {
+                btn.classList.remove('active', 'bg-gold', 'text-darkbg', 'border-gold');
+                btn.classList.add('bg-white/5', 'text-gray-300', 'border-white/10');
+            });
+
+            event.target.classList.add('active', 'bg-gold', 'text-darkbg', 'border-gold');
+            event.target.classList.remove('bg-white/5', 'text-gray-300', 'border-white/10');
+
+            // Filter items
+            items.forEach(item => {
+                if (category === 'all' || item.classList.contains(category)) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
+
+        // Modal Lightbox Functions
+        const modal = document.getElementById('image-modal');
+        const modalImg = document.getElementById('modal-img');
+        const modalTitle = document.getElementById('modal-title');
+        const modalTag = document.getElementById('modal-tag');
+
+        function openModal(title, tag, imgSrc) {
+            modalImg.src = imgSrc;
+            modalTitle.textContent = title;
+            modalTag.textContent = tag;
+            modal.classList.remove('hidden');
+        }
+
+        function closeModal() {
+            modal.classList.add('hidden');
+        }
+
+        // Close Modal on clicking backdrop
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+
+        // Contact Form Handler -> Direct WhatsApp Redirection
+        const contactForm = document.getElementById('contact-form');
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            const name = document.getElementById('form-name').value;
+            const service = document.getElementById('form-service').value;
+            const message = document.getElementById('form-message').value;
+
+            // Build formatted WhatsApp message
+            const waText = `Halo Safiqudafa,%0A%0ASaya *${encodeURIComponent(name)}*%0ALayanan: *${encodeURIComponent(service)}*%0A%0APesan:%0A${encodeURIComponent(message)}`;
+            const waUrl = `https://wa.me/6285792124938?text=${waText}`;
+
+            // Redirect to WhatsApp
+            window.open(waUrl, '_blank');
+        });
+    </script>
+</body>
+</html>
